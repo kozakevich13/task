@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { setExerciseResults } from "../redux/actions";
 import { useDispatch } from "react-redux";
+import { API_KEY } from "./apiConfig";
 
 const ExerciseSearchForm = () => {
   const [formData, setFormData] = useState({
@@ -11,9 +12,6 @@ const ExerciseSearchForm = () => {
     muscle: "",
     difficulty: "",
   });
-
-  const [exercises, setExercises] = useState([]);
-  const [isFormValid, setIsFormValid] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -52,7 +50,6 @@ const ExerciseSearchForm = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-    setIsFormValid(Object.values(formData).some((val) => val !== ""));
   };
 
   const handleSearch = () => {
@@ -65,7 +62,7 @@ const ExerciseSearchForm = () => {
     };
 
     const headers = {
-      "X-Api-Key": `kGCqBTotFOMHT6qzhemueg==uZGVrDOjK80Cn1M6`,
+      "X-Api-Key": API_KEY,
     };
 
     axios
@@ -75,7 +72,6 @@ const ExerciseSearchForm = () => {
       })
       .then((response) => {
         dispatch(setExerciseResults(response.data));
-        setExercises(response.data);
         navigate("/results");
       })
       .catch((error) => {
