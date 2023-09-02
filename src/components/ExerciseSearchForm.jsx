@@ -90,7 +90,7 @@ const ExerciseSearchForm = () => {
 
   return (
     <div>
-      <label>Назва:</label>
+      <label>name:</label>
       <input
         type="text"
         name="name"
@@ -98,7 +98,7 @@ const ExerciseSearchForm = () => {
         onChange={handleInputChange}
       />
 
-      <label>Тип:</label>
+      <label>type:</label>
       <select name="type" value={formData.type} onChange={handleInputChange}>
         {typeOptions.map((typeOption) => (
           <option key={typeOption} value={typeOption}>
@@ -107,7 +107,7 @@ const ExerciseSearchForm = () => {
         ))}
       </select>
 
-      <label>М'яз:</label>
+      <label>muscle:</label>
       <select
         name="muscle"
         value={formData.muscle}
@@ -120,34 +120,19 @@ const ExerciseSearchForm = () => {
         ))}
       </select>
 
-      <label>Складність:</label>
+      <label>difficulty:</label>
       <select
         name="difficulty"
         value={formData.difficulty}
         onChange={handleInputChange}
       >
-        <option value="">Виберіть складність</option>
-        <option value="beginner">Початківець</option>
-        <option value="intermediate">Середній</option>
-        <option value="expert">Експерт</option>
+        <option value="">Select the difficulty</option>
+        <option value="beginner">beginner</option>
+        <option value="intermediate">intermediate</option>
+        <option value="expert">expert</option>
       </select>
 
-      <button onClick={handleSearch}>Пошук</button>
-
-      {/* <ul>
-        {exercises.map((exercise, index) => (
-          <li key={index}>
-            <strong>Назва:</strong> {exercise.name}
-            <br />
-            <strong>Тип:</strong> {exercise.type}
-            <br />
-            <strong>М'яз:</strong> {exercise.muscle}
-            <br />
-            <strong>Інструкції:</strong>
-            <p>{exercise.instructions}</p>
-          </li>
-        ))}
-      </ul> */}
+      <button onClick={handleSearch}>search</button>
     </div>
   );
 };

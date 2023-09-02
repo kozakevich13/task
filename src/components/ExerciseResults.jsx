@@ -13,9 +13,9 @@ const ExerciseResults = () => {
             <li key={index}>
               <strong>Назва:</strong> {exercise.name}
               <br />
-              <strong>Тип:</strong> {exercise.type}
+              <strong>type:</strong> {exercise.type}
               <br />
-              <strong>М'яз:</strong> {exercise.muscle}
+              <strong>muscle:</strong> {exercise.muscle}
               <br />
               <strong>Інструкції:</strong>
               <p>{exercise.instructions}</p>
