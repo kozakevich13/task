@@ -13,6 +13,7 @@ const ExerciseSearchForm = () => {
   });
 
   const [exercises, setExercises] = useState([]);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const ExerciseSearchForm = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+    setIsFormValid(Object.values(formData).some((val) => val !== ""));
   };
 
   const handleSearch = () => {
@@ -72,7 +74,6 @@ const ExerciseSearchForm = () => {
         headers,
       })
       .then((response) => {
-        console.log(JSON.stringify(response.data));
         dispatch(setExerciseResults(response.data));
         setExercises(response.data);
         navigate("/results");
@@ -87,7 +88,7 @@ const ExerciseSearchForm = () => {
         }
       });
   };
-
+  const isFormEmpty = Object.values(formData).every((val) => val === "");
   return (
     <div>
       <label>name:</label>
@@ -132,7 +133,9 @@ const ExerciseSearchForm = () => {
         <option value="expert">expert</option>
       </select>
 
-      <button onClick={handleSearch}>search</button>
+      <button onClick={handleSearch} disabled={isFormEmpty}>
+        search
+      </button>
     </div>
   );
 };

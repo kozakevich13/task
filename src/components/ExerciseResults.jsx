@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 const ExerciseResults = () => {
   const exerciseResults = useSelector((state) => state.exerciseResults) || [];
-  console.log(exerciseResults);
 
   return (
     <div>
