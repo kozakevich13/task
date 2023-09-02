@@ -13,7 +13,6 @@ const ExerciseResults = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    // Переходить назад на попередню сторінку
     navigate(-1);
   };
 

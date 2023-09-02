@@ -79,7 +79,7 @@ const ExerciseSearchForm = () => {
       })
       .then((response) => {
         dispatch(setExerciseResults(response.data));
-        navigate("/results");
+        navigate("/task/results");
       })
       .catch((error) => {
         if (error.response) {
