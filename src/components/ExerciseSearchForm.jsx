@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { setExerciseResults } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 const ExerciseSearchForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +15,7 @@ const ExerciseSearchForm = () => {
   const [exercises, setExercises] = useState([]);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const muscleOptions = [
     "",
@@ -70,6 +73,7 @@ const ExerciseSearchForm = () => {
       })
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        dispatch(setExerciseResults(response.data));
         setExercises(response.data);
         navigate("/results");
       })
@@ -130,7 +134,7 @@ const ExerciseSearchForm = () => {
 
       <button onClick={handleSearch}>Пошук</button>
 
-      <ul>
+      {/* <ul>
         {exercises.map((exercise, index) => (
           <li key={index}>
             <strong>Назва:</strong> {exercise.name}
@@ -143,7 +147,7 @@ const ExerciseSearchForm = () => {
             <p>{exercise.instructions}</p>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
