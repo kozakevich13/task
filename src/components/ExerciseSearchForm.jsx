@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ExerciseSearchForm = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const ExerciseSearchForm = () => {
   });
 
   const [exercises, setExercises] = useState([]);
+
+  const navigate = useNavigate();
 
   const muscleOptions = [
     "",
@@ -68,6 +71,7 @@ const ExerciseSearchForm = () => {
       .then((response) => {
         console.log(JSON.stringify(response.data));
         setExercises(response.data);
+        navigate("/results");
       })
       .catch((error) => {
         if (error.response) {
