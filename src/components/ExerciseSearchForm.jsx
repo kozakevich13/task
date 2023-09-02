@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { setExerciseResults } from "../redux/actions";
 import { useDispatch } from "react-redux";
-import { API_KEY } from "./apiConfig";
+import { API_KEY } from "../apiConfig";
 
 const ExerciseSearchForm = () => {
   const [formData, setFormData] = useState({
@@ -16,36 +16,36 @@ const ExerciseSearchForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const muscleOptions = [
-    "",
-    "abdominals",
-    "abductors",
-    "adductors",
-    "biceps",
-    "calves",
-    "chest",
-    "forearms",
-    "glutes",
-    "hamstrings",
-    "lats",
-    "lower_back",
-    "middle_back",
-    "neck",
-    "quadriceps",
-    "traps",
-    "triceps",
-  ];
+  const muscleOptions = {
+    "": "Choose a muscle",
+    abdominals: "Abdominals",
+    abductors: "Abductors",
+    adductors: "Adductors",
+    biceps: "Biceps",
+    calves: "Calves",
+    chest: "Chest",
+    forearms: "Forearms",
+    glutes: "Gutes",
+    hamstrings: "Hamstrings",
+    lats: "Lats",
+    lower_back: "Lower back",
+    middle_back: "Middle back",
+    neck: "Neck",
+    quadriceps: "Quadriceps",
+    traps: "Traps",
+    triceps: "Triceps",
+  };
 
-  const typeOptions = [
-    "",
-    "cardio",
-    "olympic_weightlifting",
-    "plyometrics",
-    "powerlifting",
-    "strength",
-    "stretching",
-    "strongman",
-  ];
+  const typeOptions = {
+    "": "Choose a type",
+    cardio: "Cardio",
+    olympic_weightlifting: "Olympic weightlifting",
+    plyometrics: "Plyometrics",
+    powerlifting: "Powerlifting",
+    strength: "Strength",
+    stretching: "Stretching",
+    strongman: "Strongman",
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -84,7 +84,9 @@ const ExerciseSearchForm = () => {
         }
       });
   };
+
   const isFormEmpty = Object.values(formData).every((val) => val === "");
+
   return (
     <div>
       <label>name:</label>
@@ -97,9 +99,9 @@ const ExerciseSearchForm = () => {
 
       <label>type:</label>
       <select name="type" value={formData.type} onChange={handleInputChange}>
-        {typeOptions.map((typeOption) => (
-          <option key={typeOption} value={typeOption}>
-            {typeOption}
+        {Object.entries(typeOptions).map(([key, value]) => (
+          <option key={key} value={key}>
+            {value}
           </option>
         ))}
       </select>
@@ -110,9 +112,9 @@ const ExerciseSearchForm = () => {
         value={formData.muscle}
         onChange={handleInputChange}
       >
-        {muscleOptions.map((muscleOption) => (
-          <option key={muscleOption} value={muscleOption}>
-            {muscleOption}
+        {Object.entries(muscleOptions).map(([key, value]) => (
+          <option key={key} value={key}>
+            {value}
           </option>
         ))}
       </select>
