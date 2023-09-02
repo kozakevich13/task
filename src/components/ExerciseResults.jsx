@@ -3,13 +3,16 @@ import { useSelector } from "react-redux";
 
 const ExerciseResults = () => {
   const exerciseResults = useSelector((state) => state.exerciseResults) || [];
-  console.log(exerciseResults.exerciseResults);
+  console.log(exerciseResults);
+
   return (
     <div>
       <h2>Search Results:</h2>
-      <ul>
-        {exerciseResults.exerciseResults.map((exercise, index) => (
-          <li key={index}>
+      {exerciseResults.exerciseResults.length === 0 ? (
+        <p>there are no such exercises</p>
+      ) : (
+        <ul>
+          {exerciseResults.exerciseResults.map((exercise, index) => (
             <li key={index}>
               <strong>name:</strong> {exercise.name}
               <br />
@@ -20,9 +23,9 @@ const ExerciseResults = () => {
               <strong>instructions:</strong>
               <p>{exercise.instructions}</p>
             </li>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
