@@ -11,8 +11,8 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route exact path="/" element={<ExerciseSearchForm />} />
-          <Route path="/results" element={<ExerciseResults />} />
+          <Route exact path="/ivory/" element={<ExerciseSearchForm />} />
+          <Route path="/ivory/results" element={<ExerciseResults />} />
         </Routes>
       </Router>
     </Provider>
