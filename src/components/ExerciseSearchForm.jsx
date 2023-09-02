@@ -4,6 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { setExerciseResults } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import { API_KEY } from "../apiConfig";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
 
 const ExerciseSearchForm = () => {
   const [formData, setFormData] = useState({
@@ -88,53 +95,82 @@ const ExerciseSearchForm = () => {
   const isFormEmpty = Object.values(formData).every((val) => val === "");
 
   return (
-    <div>
-      <label>name:</label>
-      <input
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleInputChange}
-      />
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh"
+    >
+      <form>
+        <TextField
+          label="Name"
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+          sx={{ minWidth: 200, m: 1 }}
+        />
 
-      <label>type:</label>
-      <select name="type" value={formData.type} onChange={handleInputChange}>
-        {Object.entries(typeOptions).map(([key, value]) => (
-          <option key={key} value={key}>
-            {value}
-          </option>
-        ))}
-      </select>
+        <FormControl sx={{ minWidth: 200, m: 1 }}>
+          <InputLabel id="type-label">Type</InputLabel>
+          <Select
+            labelId="type-label"
+            label="Type"
+            name="type"
+            value={formData.type}
+            onChange={handleInputChange}
+          >
+            {Object.entries(typeOptions).map(([key, value]) => (
+              <MenuItem key={key} value={key}>
+                {value}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-      <label>muscle:</label>
-      <select
-        name="muscle"
-        value={formData.muscle}
-        onChange={handleInputChange}
-      >
-        {Object.entries(muscleOptions).map(([key, value]) => (
-          <option key={key} value={key}>
-            {value}
-          </option>
-        ))}
-      </select>
+        <FormControl sx={{ minWidth: 200, m: 1 }}>
+          <InputLabel id="muscle-label">Muscle</InputLabel>
+          <Select
+            labelId="muscle-label"
+            label="Muscle"
+            name="muscle"
+            value={formData.muscle}
+            onChange={handleInputChange}
+          >
+            {Object.entries(muscleOptions).map(([key, value]) => (
+              <MenuItem key={key} value={key}>
+                {value}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-      <label>difficulty:</label>
-      <select
-        name="difficulty"
-        value={formData.difficulty}
-        onChange={handleInputChange}
-      >
-        <option value="">Select the difficulty</option>
-        <option value="beginner">beginner</option>
-        <option value="intermediate">intermediate</option>
-        <option value="expert">expert</option>
-      </select>
+        <FormControl sx={{ minWidth: 200, m: 1 }}>
+          <InputLabel id="difficulty-label">Difficulty</InputLabel>
+          <Select
+            labelId="difficulty-label"
+            label="Difficulty"
+            name="difficulty"
+            value={formData.difficulty}
+            onChange={handleInputChange}
+          >
+            <MenuItem value="">Select the difficulty</MenuItem>
+            <MenuItem value="beginner">beginner</MenuItem>
+            <MenuItem value="intermediate">intermediate</MenuItem>
+            <MenuItem value="expert">expert</MenuItem>
+          </Select>
+        </FormControl>
 
-      <button onClick={handleSearch} disabled={isFormEmpty}>
-        search
-      </button>
-    </div>
+        <Button
+          variant="contained"
+          sx={{ minWidth: 200, minHeight: 55, mt: 1 }}
+          onClick={handleSearch}
+          disabled={isFormEmpty}
+        >
+          Search
+        </Button>
+      </form>
+    </Box>
   );
 };
 
